@@ -33,12 +33,20 @@ const PracticeStateFetch = props => {
             status_active: true,
             status_inactive: true,
             characters: null,
+            notas: [
+                { id: 1, name: 'Pedro', nota: 20 }
+            ]
         }
     )
 
     useEffect(() => {
         // componentDidMount()
-        getUsers("https://rickandmortyapi.com/api/character")
+        getUsers("https://rickandmortyapi.com/api/character");
+        addNotas({
+            id: 3,
+            name: 'Leonardo',
+            nota: 14
+        });
 
         return () => {
             // componentWillUnmount()
@@ -80,7 +88,7 @@ const PracticeStateFetch = props => {
         }) */
     }
 
-    const getUsers = (url = "", options = {}) => {
+    /* const getUsers = (url = "", options = {}) => {
         fetch(url, options)
             .then((resp) => {
                 console.log(resp);
@@ -92,20 +100,45 @@ const PracticeStateFetch = props => {
                     return {...prevState, characters: data}
                 })
             })
+    } */
+
+    /* async function prueba(url = "", options = {}) {
+
+    } */
+
+
+    const addNotas = (data) => {
+        setState((prevState) => {
+            return {
+                ...prevState, notas: prevState.notas.concat({
+                    id: 2,
+                    name: 'Humberto',
+                    nota: 12
+                })
+            }
+        })
+        setState((prevState) => {
+            return {
+                ...prevState, notas: prevState.notas.concat({
+                    id: 3,
+                    name: 'Diego',
+                    nota: 15
+                })
+            }
+        })
+        setState((prevState) => {
+            return { ...prevState, notas: prevState.notas.concat(data) }
+        })
     }
 
-    async function prueba(url = "", options = {}) {
-
-    }
-
-    /* const getUsers = async (url = "", options = {}) => {
+    const getUsers = async (url = "", options = {}) => {
         const response = await fetch(url, options);
         const data = await response.json();
         console.log(data);
         setState(prevState => {
             return { ...prevState, characters: data }
         })
-    } */
+    }
 
     return (
         <div className="App">
