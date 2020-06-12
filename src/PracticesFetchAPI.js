@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import * as api from './api';
+import * as api from './api-async';
 
 const PracticesFetchAPI = props => {
     const [state, setState] = useState({
         characters: null,
         locations: null,
         episodes: null,
+        character: null
     })
 
     useEffect(() => {
         api.getCharacters(api.urlCharacters, setState);
+        api.getCharacter(api.urlCharacters + 1, setState);
         api.getLocations(api.urlLocations, setState);
         api.getEpisodes(api.urlEpisodes, setState);
     }, [])
